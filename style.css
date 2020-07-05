@@ -11,6 +11,10 @@
   font-size: 30px;
 }
 
+#rpg-text img {
+  width: 100%;
+}
+
 #text-entry-form {
   /* position: absolute; */
   display: flex;
