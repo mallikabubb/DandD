@@ -221,17 +221,12 @@ window.onload = () => {
 
     async function initialize_race() {
 
-        write(`>>>Choose from:`)
-
-        let races = ['human','elf','dwarf']
-        // races.forEach(function(item, index, array){
-        //     write(`${console.log(item)}<br>`)
-        // })
+        let races = ['human','elf','dwarf','halfling', 'dragonborn']
         let txt =''
         for (let race of races) {
             txt += (' ' + race)
         }
-        write(txt)
+        write(`>>>Choose race: {${txt} }`)
 
         let race = await readStr()
         race = race.toLowerCase()
@@ -243,38 +238,52 @@ window.onload = () => {
         player.race = race
         switch (race){
                 case 'elf':
-                    player.intel = player.intel + 2
+                    player.dexterity = player.dexterity + 2
                     break
                 case 'dwarf':
                     player.cons = player.cons + 2
-                    player.ac = player.ac + 2
                     break
+                case 'halfling':
+                        player.dexterity = player.dexterity + 2
+                        break
+                case 'human':
+                        player.dexterity = player.dexterity + 1
+                        player.charisma = player.charisma +1
+                        player.strength = player.strength +1
+                        player.wisdom = player.wisdom +1
+                        player.intel = player.intel +1
+                        player.cons = player.cons +1
+                        break
+                 case 'dragonborn':
+                        player.charisma = player.charisma + 1
+                        player.strength = player.strenght + 2
+                        break
             }
     }
 
     async function update_character_sheet() {
 
-        player.race = race
-        switch (race){
-                case 'elf':
-                    player.intel = player.dexterity + 2
-                    break
-                case 'dwarf':
-                    player.cons = player.cons + 2
-                    break
-            }
-        player.clss = cls
-            switch (cls){
-                    case 'fighter':
-                        player.hp = 12
-                        break
-                    case 'wizard':
-                        player.hp = 8
-                        break
-                    case 'rogue':
-                        player.hp = 10
-                        break
-                    }
+        // player.race = race
+        // switch (race){
+        //         case 'elf':
+        //             player.dexterity = player.dexterity + 2
+        //             break
+        //         case 'dwarf':
+        //             player.cons = player.cons + 2
+        //             break
+        //     }
+        // player.clss = cls
+        //     switch (cls){
+        //             case 'fighter':
+        //                 player.hp = 12
+        //                 break
+        //             case 'wizard':
+        //                 player.hp = 8
+        //                 break
+        //             case 'rogue':
+        //                 player.hp = 10
+        //                 break
+        //             }
     
     }
 
