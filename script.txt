@@ -89,9 +89,6 @@ window.onload = () => {
             this.level = level;
             this.exp = 0
             this.gold = 100
-            this.hp = `NA`
-            this.ac = `NA`
-
             this.strength = getStat();
             this.intel = getStat();
             this.dexterity = getStat();
@@ -100,16 +97,12 @@ window.onload = () => {
             this.charisma = getStat();
 
             this.race = "NA";
-            this.clss = "NA"
         }
 
         toString() {
             return `Player Stats:<br>
                     Level: ${this.level}<br>
                     Experience points: ${this.exp}<br>
-                    <br>
-                    Hit points: ${this.hp}<br>
-                    Armor class: ${this.ac}<br>
                     <br>
                     Strength: ${this.strength}<br>
                     Dexterity: ${this.dexterity}<br>
@@ -250,32 +243,6 @@ window.onload = () => {
                     player.ac = player.ac + 2
                     break
             }
-    }
-
-    async function update_character_sheet() {
-
-        player.race = race
-        switch (race){
-                case 'elf':
-                    player.intel = player.dexterity + 2
-                    break
-                case 'dwarf':
-                    player.cons = player.cons + 2
-                    break
-            }
-        player.clss = cls
-            switch (cls){
-                    case 'fighter':
-                        player.hp = 12
-                        break
-                    case 'wizard':
-                        player.hp = 8
-                        break
-                    case 'rogue':
-                        player.hp = 10
-                        break
-                    }
-    
     }
 
     async function initialize_player_and_world() {
