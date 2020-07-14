@@ -58,8 +58,8 @@ window.onload = () => {
         var x = [
             getRandomIntInclusive(2, 6),
             getRandomIntInclusive(2, 6),
-            getRandomIntInclusive(2, 6),
-            getRandomIntInclusive(2, 6)]
+            getRandomIntInclusive(1, 6),
+            getRandomIntInclusive(1, 6)]
         //return x.reduce(x)
         var min = x.reduce(function (a, b) {
             return Math.min(a, b);
@@ -99,8 +99,28 @@ window.onload = () => {
             this.wisdom = getStat();
             this.charisma = getStat();
 
-            this.race = "NA";
+            this.race = "NA"
             this.clss = "NA"
+
+            this.acrobatics= 0
+            this.animal_handling= 0
+            this.arcana=0
+            this.athletics=0
+            this.deception=0
+            this.history=0
+            this.insight=0
+            this.intimidation=0
+            this.investigation=0
+            this.medicine=0
+            this.nature=0
+            this.perception=0
+            this.performance=0
+            this.persuasion=0
+            this.religion=0
+            this.slight_of_hand=0
+            this.stealth=0
+            this.survival=0
+
         }
 
         toString() {
@@ -121,7 +141,26 @@ window.onload = () => {
                     Gold: ${this.gold}<br>
                     <br>
                     Race: ${this.race}<br>
-                     `
+                    <br>
+                    Acrobatics: ${this.acrobatics}<br>
+                    Animal Handling: ${this.animal_handling}<br>
+                    Arcana: ${this.arcana}<br>
+                    Athletics: ${this.athletics}<br>
+                    Deception: ${this.deception}<br>
+                    History: ${this.history}<br>
+                    Insight: ${this.insight}<br>
+                    Intimidation: ${this.intimidation}<br>
+                    Investigation: ${this.investigation}<br>
+                    Medicine: ${this.medicine}<br>
+                    Nature: ${this.nature}<br>
+                    Perception: ${this.perception}<br>
+                    Performance: ${this.performance}<br>
+                    Persuasion: ${this.persuasion}<br>
+                    Religion: ${this.religion}<br>
+                    Slight of Hand: ${this.slight_of_hand}<br>
+                    Stealth: ${this.stealth}<br>
+                    Survival: ${this.survival}<br>                    
+                    `
         }
 
     }
@@ -221,7 +260,7 @@ window.onload = () => {
 
     async function initialize_race() {
 
-        let races = ['human','elf','dwarf','halfling', 'dragonborn']
+        let races = ['human','elf','dwarf','halfling', 'dragonborn', 'gnome', 'half-orc', 'tiefling']
         let txt =''
         for (let race of races) {
             txt += (' ' + race)
@@ -244,24 +283,75 @@ window.onload = () => {
                     player.cons = player.cons + 2
                     break
                 case 'halfling':
-                        player.dexterity = player.dexterity + 2
-                        break
+                    player.dexterity = player.dexterity + 2
+                    break
                 case 'human':
-                        player.dexterity = player.dexterity + 1
-                        player.charisma = player.charisma +1
-                        player.strength = player.strength +1
-                        player.wisdom = player.wisdom +1
-                        player.intel = player.intel +1
-                        player.cons = player.cons +1
-                        break
+                    player.dexterity += 1
+                    player.charisma = player.charisma +1
+                    player.strength = player.strength +1
+                    player.wisdom = player.wisdom +1
+                    player.intel = player.intel +1
+                    player.cons = player.cons +1
+                    break
                  case 'dragonborn':
-                        player.charisma = player.charisma + 1
-                        player.strength = player.strenght + 2
-                        break
+                    player.charisma = player.charisma + 1
+                    player.strength = player.strength + 2
+                    break
+                 case 'gnome':
+                    player.intel = player.intel + 2
+                    player.cons = player.cons + 1
+                    break
+                case 'half-orc':
+                    player.strength = player.strength + 2
+                    player.cons = player.cons + 1
+                    break
+                case 'tiefling':
+                    player.charisma = player.charisma + 2
+                    player.intel = player.intel + 1
+                    break
             }
     }
 
+    async function getModifier(x) {
+        //if(x >= 10){
+        //return((x-10)/2)
+        return(Math.floor((x-10)/2))
+        //}else{
+        //  return(floor((x-10)/2))
+        //}
+    }
+
     async function update_character_sheet() {
+
+        write(`Updating character sheet`)
+
+        let strmod = await getModifier(player.strength)
+        let dexmod = await getModifier(player.dexterity)
+        let conmod = await getModifier(player.cons)
+        let intmod = await getModifier(player.intel)
+        let wismod = await getModifier(player.wisdom)
+        let chamod = await getModifier(player.charisma)
+
+        write(strmod)
+
+        player.acrobatics= dexmod
+        player.animal_handling= wismod
+        player.athletics= strmod
+        player.arcana= intmod
+        player.deception= chamod
+        player.history= intmod
+        player.insight= wismod
+        player.intimidation= chamod
+        player.investigation= intmod
+        player.medicine= wismod
+        player.nature= intmod
+        player.perception= wismod
+        player.performance= chamod
+        player.persuasion= chamod
+        player.religion= intmod
+        player.slight_of_hand= dexmod
+        player.stealth= dexmod
+        player.survival= wismod
 
         // player.race = race
         // switch (race){
@@ -293,7 +383,7 @@ window.onload = () => {
         //await initialize_class()
         //await initialize_weapons()
         //await initialize_armor()
-        //await update_character_sheet()
+        await update_character_sheet()
         var newStatCheck = write(player);
         newStatCheck.style.fontSize = "12px";
         return
