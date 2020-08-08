@@ -1,9 +1,28 @@
 #rpg-text {
   overflow: scroll;
-  height: 100%;
-  width: 100%;
   border: 2px solid black;
   padding: 10px;
+}
+
+#playfield {
+  width: 100%;
+}
+
+.columns {
+  display: flex;
+  height: 100%;
+}
+
+.wall {
+  color: blue;
+}
+
+.monster {
+  color: red;
+}
+
+.me {
+  color: gold;
 }
 
 #rpg-text p {
@@ -24,7 +43,6 @@ audio {
   display: flex;
   width: 100%;
   padding-top: 10px;
-  bottom: 0;
 }
 
 #textentry {
